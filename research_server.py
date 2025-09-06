@@ -7,7 +7,9 @@ from mcp.server.fastmcp import FastMCP
 PAPER_DIR = "papers"
 
 # Initialize FastMCP server
-mcp = FastMCP("research", port=8001)
+# mcp = FastMCP("research", port=8001)
+PORT = int(os.getenv("PORT", "8000"))  # Render가 주입하는 포트 사용
+mcp = FastMCP("research", host="0.0.0.0", port=PORT)  # 0.0.0.0로 바인딩
 
 @mcp.tool()
 def search_papers(topic: str, max_results: int = 5) -> List[str]:
